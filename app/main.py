@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI, HTTPException, Response, status
 
 from app.schema import UserCreate
 
@@ -22,8 +22,29 @@ def add_user(new_user: UserCreate):
  users.append(new_user)
  return new_user
 
-@app.get("/api/users")
-def get_users():
-   return users 
+@app.get("/api/users") 
+def get_users(): 
+    return users 
+ 
+ 
+@app.get("/api/users/{user_id}") 
+def get_user(user_id: int): 
+    for existing_user in users: 
+        if existing_user.user_id == user_id: 
+            return existing_user 
+ 
+        raise HTTPException( 
+            status_code=status.HTTP_404_NOT_FOUND, 
+            detail="User not found", 
+    ) 
 
-#Skipping to the PR
+@app.delete("/api/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT) 
+def delete_user(user_id: int): 
+    for index, existing_user in enumerate(users): 
+        if existing_user.user_id == user_id: 
+         users.pop(index) 
+    return Response(status_code=status.HTTP_204_NO_CONTENT) 
+raise HTTPException( 
+    status_code=status.HTTP_404_NOT_FOUND, 
+    detail="User not found", 
+) 
