@@ -43,8 +43,8 @@ def delete_user(user_id: int):
     for index, existing_user in enumerate(users): 
         if existing_user.user_id == user_id: 
          users.pop(index) 
-    return Response(status_code=status.HTTP_204_NO_CONTENT) 
-raise HTTPException( 
-    status_code=status.HTTP_404_NOT_FOUND, 
-    detail="User not found", 
-) 
+        return Response(status_code=status.HTTP_204_NO_CONTENT) 
+    raise HTTPException( 
+        status_code=status.HTTP_404_NOT_FOUND, 
+        detail="User not found", 
+    ) 
