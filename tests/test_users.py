@@ -69,3 +69,5 @@ def test_deleted_user_can_no_longer_be_retrieved(client):
     client.delete("/api/users/21")
     response = client.get("/api/users/21")
     assert response.status_code == 404
+
+
