@@ -17,7 +17,7 @@ def hello():
 @app.post("/api/users", status_code=status.HTTP_201_CREATED)
 def add_user(new_user: UserCreate):
  for existing_user in users:
-    if existing_user.user_id == new_user.user_id:
+    if existing_user.userid == new_user.userid:
        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail= "A user with this id already exists")
  users.append(new_user)
  return new_user
